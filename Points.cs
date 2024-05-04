@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Text;
+using System.Linq;
+using System.Net.Http.Headers;
 using System.Windows.Forms;
 
 namespace ParticlesTest
 {
     public abstract class IImpactPoint
     {
-        public float X;
-        public float Y;
-        public float Radius = 5;
+        public int X;
+        public int Y;
+        public int Radius = 5;
 
         // абстрактный метод с помощью которого будем изменять состояние частиц (например, притягивать)
         public abstract void ImpactParticle(Particle particle);
@@ -64,7 +67,17 @@ namespace ParticlesTest
 
     public class TargetPoint : IImpactPoint
     {
-        public TargetPoint() { Radius = 40; }
+        private static Random rand = new Random();
+        private List<Explosion> explosions = new List<Explosion>();
+
+        public PictureBox pbMain;
+
+        public Color color;
+        public TargetPoint(PictureBox pb) 
+        {
+            pbMain = pb;
+            Respawn();
+        }
         public override void ImpactParticle(Particle particle)
         {
             float gX = X - particle.X;
@@ -73,15 +86,39 @@ namespace ParticlesTest
             {
                 particle.Destroyed = true;
                 Radius -= 10;
+                if (Radius == 0)
+                {
+                    explosions.Add(new Explosion(X, Y, color));
+                    Respawn();
+                }
+                else
+                {
+                    explosions.Add(new SmallExplosion(X, Y, color));
+                }
             }
         }
         public override void Render(Graphics g)
         {
+            foreach(var explosion in explosions.ToList()) 
+            {
+                if (explosion.ParticlesCount == 0 && explosion.particles.Count == 0)
+                    explosions.Remove(explosion);
+
+                explosion.UpdateState();
+                explosion.Render(g);
+            }
             for(int i = 0; i < (Radius / 10); i++)
             {
                 float r = Radius - i * 10;
-                g.DrawEllipse(new Pen(Color.Red, 2), X - r, Y - r, r * 2, r * 2);
+                g.DrawEllipse(new Pen(color, 2), X - r, Y - r, r * 2, r * 2);
             }
+        }
+        private void Respawn()
+        {
+            Radius = 30;
+            color = Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
+            X = rand.Next(pbMain.Width - (int)Radius*2) + Radius;
+            Y = rand.Next(pbMain.Height - (int)Radius*2) + Radius;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace ParticlesTest.Guns
     public abstract class Gun
     {
         protected static List<Particle> particles = new List<Particle>();
-        public static  List<IImpactPoint> points = new List<IImpactPoint>(); 
+        public static List<IImpactPoint> points = new List<IImpactPoint>(); 
 
         public int X; // X центра эмиттера
         public int Y; // Y центра эмиттера

@@ -26,16 +26,16 @@ namespace ParticlesTest
                 Y = pbMain.Height / 2,
             };
 
-            CurrentGun = new Shotgun
+            CurrentGun = new Pistol
             {
                 player = this.player
             };
 
-            Gun.points.Add(new TargetPoint
-            {
-                X = pbMain.Width * 0.25f,
-                Y = pbMain.Height / 2,
-            });
+            Gun.points.Add(new TargetPoint(pbMain));
+            Gun.points.Add(new TargetPoint(pbMain));
+            Gun.points.Add(new TargetPoint(pbMain));
+            Gun.points.Add(new TargetPoint(pbMain));
+            Gun.points.Add(new TargetPoint(pbMain));
 
             /*var emitter = new Emitter 
             {
