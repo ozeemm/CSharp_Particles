@@ -20,6 +20,7 @@ namespace ParticlesTest
         public float SpeedY;
 
         public float Life; // Запас здоровья частицы
+        public bool Destroyed = false;
 
         public static Random rand = new Random();
 

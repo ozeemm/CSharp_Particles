@@ -69,13 +69,13 @@ namespace ParticlesTest
                     particle.Y += particle.SpeedY;
                 }
             }
-            while (particlesToCreate >= 1)
-            {
-                particlesToCreate -= 1;
-                var particle = CreateParticle();
-                ResetParticle(particle);
-                particles.Add(particle);
-            }
+                while (particlesToCreate >= 1)
+                {
+                    particlesToCreate -= 1;
+                    var particle = CreateParticle();
+                    ResetParticle(particle);
+                    particles.Add(particle);
+                }
         }
 
         public virtual void ResetParticle(Particle particle)

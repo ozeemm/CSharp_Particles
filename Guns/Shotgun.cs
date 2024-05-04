@@ -13,8 +13,8 @@ namespace ParticlesTest.Guns
             Spreading = 0;
             SpeedMin = 7;
             SpeedMax = 7;
-            RadiusMin = 8;
-            RadiusMax = 10;
+            RadiusMin = 6;
+            RadiusMax = 8;
             LifeMin = 80;
             LifeMax = 100;
             Cooldown = 20;

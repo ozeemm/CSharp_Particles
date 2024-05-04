@@ -9,7 +9,8 @@ namespace ParticlesTest.Guns
 {
     public abstract class Gun
     {
-        protected List<Particle> particles = new List<Particle>();
+        protected static List<Particle> particles = new List<Particle>();
+        public static  List<IImpactPoint> points = new List<IImpactPoint>(); 
 
         public int X; // X центра эмиттера
         public int Y; // Y центра эмиттера
@@ -47,12 +48,17 @@ namespace ParticlesTest.Guns
             foreach (var particle in particles.ToList())
             {
                 particle.Life--;
-                if (particle.Life < 0)
+                if (particle.Life < 0 || particle.Destroyed)
                 {
                     particles.Remove(particle);
                 }
                 else
                 {
+                    foreach (var point in points)
+                    {
+                        point.ImpactParticle(particle);
+                    }
+
                     particle.X += particle.SpeedX;
                     particle.Y += particle.SpeedY;
                 }
@@ -64,6 +70,11 @@ namespace ParticlesTest.Guns
             foreach (var particle in particles)
             {
                 particle.Draw(graphics);
+            }
+
+            foreach(var point in points)
+            {
+                point.Render(graphics);
             }
         }
     }
