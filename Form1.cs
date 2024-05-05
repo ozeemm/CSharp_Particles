@@ -14,8 +14,8 @@ namespace ParticlesTest
         private Gun CurrentGun;
         private bool IsMousePressed = false;
         public static int Score = 0;
-        private Emitter emitter;
-        
+        private bool IsBorders = true;
+
         public Form1()
         {
             InitializeComponent();
@@ -34,6 +34,7 @@ namespace ParticlesTest
 
             PistolButton_Click(null, null);
             BulletsColorButton.BackColor = Gun.ColorFrom;
+            BorderColorButton.BackColor = Emitter.ColorFrom;
 
             Gun.player = player;
             ChangePointsCount(5);
@@ -54,10 +55,12 @@ namespace ParticlesTest
                 player.Render(graphics);
                 CurrentGun.Render(graphics);
                 ScoreLabel.Text = $"Счёт: {Score}";
-
-                foreach (Emitter emitter in emitters)
+                if (IsBorders)
                 {
-                    emitter.Render(graphics);
+                    foreach (Emitter emitter in emitters)
+                    {
+                        emitter.Render(graphics);
+                    }
                 }
             }
 
@@ -145,6 +148,20 @@ namespace ParticlesTest
         {
             TargetsLabel.Text = $"Количество целей: {TargetsTrackbar.Value}";
             ChangePointsCount(TargetsTrackbar.Value);
+        }
+
+        private void BorderColorButton_Click(object sender, EventArgs e)
+        {
+            if (colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                BorderColorButton.BackColor = colorDialog.Color;
+                Emitter.ColorFrom = colorDialog.Color;
+            }
+        }
+
+        private void BordersCheckbox_CheckedChanged(object sender, EventArgs e)
+        {
+            IsBorders = BordersCheckbox.Checked;
         }
     }
 }

@@ -32,8 +32,8 @@ namespace ParticlesTest
         public int LifeMax = 100; // Максимальное время жизни частицы
         public int ParticlesPerTick = 1; // Количество частиц за такт
 
-        public Color ColorFrom = Color.White; // начальный цвет частицы
-        public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
+        public static Color ColorFrom = Color.White; // начальный цвет частицы
+        public static Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
 
         public virtual Particle CreateParticle()
         {
