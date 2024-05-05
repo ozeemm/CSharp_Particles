@@ -12,9 +12,9 @@ namespace ParticlesTest
         
         private Player player;
         private Gun CurrentGun;
-        private bool isSpacePressed = false;
-
-        //Emitter emitter;   
+        private bool IsMousePressed = false;
+        public static int Score = 0;
+        
         public Form1()
         {
             InitializeComponent();
@@ -26,59 +26,19 @@ namespace ParticlesTest
                 Y = pbMain.Height / 2,
             };
 
-            CurrentGun = new Pistol
-            {
-                player = this.player
-            };
+            PistolButton_Click(null, null);
 
+            Gun.player = player;
             Gun.points.Add(new TargetPoint(pbMain));
             Gun.points.Add(new TargetPoint(pbMain));
             Gun.points.Add(new TargetPoint(pbMain));
             Gun.points.Add(new TargetPoint(pbMain));
             Gun.points.Add(new TargetPoint(pbMain));
-
-            /*var emitter = new Emitter 
-            {
-                Direction = 0,
-                Spreading = 30,
-                SpeedMin = 5,
-                SpeedMax = 5,
-                ColorFrom = Color.Gold,
-                ColorTo = Color.FromArgb(0, Color.Red),
-                ParticlesPerTick = 3,
-                X = pbMain.Width / 2,
-                Y = pbMain.Height / 2,
-                LifeMin = 50,
-                LifeMax = 50,
-                RadiusMin = 5,
-                RadiusMax = 5
-            };
-
-            emitters.Add(emitter);*/
-
-
-            /*
-            emitter.gravityPoints.Add(new GravityPoint
-            {
-                X = pbMain.Width * 0.25f,
-                Y = pbMain.Height / 2
-            });
-            emitter.gravityPoints.Add(new AntiGravityPoint
-            {
-                X = pbMain.Width * 0.5f,
-                Y = pbMain.Height / 2
-            });
-            emitter.gravityPoints.Add(new GravityPoint
-            {
-                X = pbMain.Width * 0.75f,
-                Y = pbMain.Height / 2
-            });
-            */
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            player.UpdateState(isSpacePressed);
+            player.UpdateState(IsMousePressed);
             CurrentGun.UpdateState();
             foreach (Emitter emitter in emitters)
             {
@@ -90,6 +50,7 @@ namespace ParticlesTest
                 
                 player.Render(graphics);
                 CurrentGun.Render(graphics);
+                ScoreLabel.Text = $"Счёт: {Score}";
 
                 foreach (Emitter emitter in emitters)
                 {
@@ -100,20 +61,44 @@ namespace ParticlesTest
             pbMain.Invalidate(); // Отрисовка
         }
 
-        private void pbMain_MouseMove(object sender, MouseEventArgs e)
+        private void pbMain_MouseDown(object sender, MouseEventArgs e)
         {
-            //emitter.MousePositionX = e.X;
-            //emitter.MousePositionY = e.Y;
+            IsMousePressed = true;
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void pbMain_MouseUp(object sender, MouseEventArgs e)
         {
-            if(e.KeyCode == Keys.Space) { isSpacePressed = true; }
+            IsMousePressed = false;
         }
 
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        private Color HighlightedColor = Color.GhostWhite;
+        private Color DefaultColor = Color.White;
+        private Button LastPressedButton;
+        private void PistolButton_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Space) { isSpacePressed = false; player.RotationSpeed *= -1; }
+            CurrentGun = new Pistol();
+            if(LastPressedButton != null)
+                LastPressedButton.BackColor = DefaultColor;
+            PistolButton.BackColor = HighlightedColor;
+            LastPressedButton = PistolButton;
+        }
+
+        private void ShotgunButton_Click(object sender, EventArgs e)
+        {
+            CurrentGun = new Shotgun();
+            if (LastPressedButton != null)
+                LastPressedButton.BackColor = DefaultColor;
+            ShotgunButton.BackColor = HighlightedColor;
+            LastPressedButton = ShotgunButton;
+        }
+
+        private void MachineGunButton_Click(object sender, EventArgs e)
+        {
+            CurrentGun = new MachineGun();
+            if (LastPressedButton != null)
+                LastPressedButton.BackColor = DefaultColor;
+            MachineGunButton.BackColor = HighlightedColor;
+            LastPressedButton = MachineGunButton;
         }
     }
 }

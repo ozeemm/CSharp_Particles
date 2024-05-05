@@ -24,10 +24,10 @@ namespace ParticlesTest.Guns
         public int LifeMax = 100; // Максимальное время жизни частицы
         public int Cooldown = 10;
 
-        public Color ColorFrom = Color.White; // начальный цвет частицы
-        public Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
+        public Color ColorFrom = Color.Orange;
+        public Color ColorTo = Color.FromArgb(0, Color.White);
 
-        public Player player;
+        public static Player player;
 
         public virtual void CreateParticles() 
         {

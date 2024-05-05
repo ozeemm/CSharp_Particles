@@ -89,10 +89,12 @@ namespace ParticlesTest
                 if (Radius == 0)
                 {
                     explosions.Add(new Explosion(X, Y, color));
+                    Form1.Score += 5;
                     Respawn();
                 }
                 else
                 {
+                    Form1.Score += 1;
                     explosions.Add(new SmallExplosion(X, Y, color));
                 }
             }

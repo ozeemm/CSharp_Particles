@@ -19,8 +19,6 @@ namespace ParticlesTest.Guns
             LifeMin = 50;
             LifeMax = 75;
             Cooldown = 2;
-            ColorFrom = Color.Orange;
-            ColorTo = Color.FromArgb(0, Color.White);
         }
         public override void CreateParticles()
         {
