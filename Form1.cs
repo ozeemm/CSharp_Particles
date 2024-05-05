@@ -14,6 +14,7 @@ namespace ParticlesTest
         private Gun CurrentGun;
         private bool IsMousePressed = false;
         public static int Score = 0;
+        private Emitter emitter;
         
         public Form1()
         {
@@ -25,6 +26,11 @@ namespace ParticlesTest
                 X = pbMain.Width / 2,
                 Y = pbMain.Height / 2,
             };
+
+            emitters.Add(new TopEmitter { Width = pbMain.Width });
+            emitters.Add(new BottomEmitter { Width = pbMain.Width, Height = pbMain.Height });
+            emitters.Add(new LeftEmitter { Height = pbMain.Height });
+            emitters.Add(new RightEmitter { Width = pbMain.Width, Height = pbMain.Height });
 
             PistolButton_Click(null, null);
             BulletsColorButton.BackColor = Gun.ColorFrom;

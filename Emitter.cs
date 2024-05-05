@@ -25,10 +25,10 @@ namespace ParticlesTest
         public int Direction = 0; // Вектор направления в градусах, куда направляет эмиттер
         public int Spreading = 360; // Разброс частиц относительно Direction
         public int SpeedMin = 1; // Начальная минимальная скорость
-        public int SpeedMax = 1; // Начальная максимальная скорость
+        public int SpeedMax = 2; // Начальная максимальная скорость
         public int RadiusMin = 2; // Минимальный радиус частицы
         public int RadiusMax = 10; // Максимальный радиус частицы
-        public int LifeMin = 20; // Минимальное время жизни частицы
+        public int LifeMin = 50; // Минимальное время жизни частицы
         public int LifeMax = 100; // Максимальное время жизни частицы
         public int ParticlesPerTick = 1; // Количество частиц за такт
 
@@ -122,6 +122,56 @@ namespace ParticlesTest
 
             particle.SpeedY = 1; // Вниз
             particle.SpeedX = Particle.rand.Next(-2, 2); // Разброс вправо/влево
+        }
+    }
+
+    public class BottomEmitter : Emitter
+    {
+        public int Width;
+        public int Height;
+
+        public override void ResetParticle(Particle particle)
+        {
+            base.ResetParticle(particle);
+
+            particle.X = Particle.rand.Next(Width);
+            particle.Y = Height; // Низ экрана
+
+            particle.SpeedY = -1; // Вниз
+            particle.SpeedX = Particle.rand.Next(-2, 2); // Разброс вправо/влево
+        }
+    }
+
+    public class LeftEmitter : Emitter
+    {
+        public int Height;
+
+        public override void ResetParticle(Particle particle)
+        {
+            base.ResetParticle(particle);
+
+            particle.X = 0;
+            particle.Y = Particle.rand.Next(Height);
+
+            particle.SpeedY = Particle.rand.Next(-2, 2);
+            particle.SpeedX = 1;
+        }
+    }
+
+    public class RightEmitter : Emitter
+    {
+        public int Width;
+        public int Height;
+
+        public override void ResetParticle(Particle particle)
+        {
+            base.ResetParticle(particle);
+
+            particle.X = Width;
+            particle.Y = Particle.rand.Next(Height);
+
+            particle.SpeedY = Particle.rand.Next(-2, 2);
+            particle.SpeedX = -1;
         }
     }
 }
