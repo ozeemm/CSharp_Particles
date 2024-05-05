@@ -117,7 +117,7 @@ namespace ParticlesTest
         }
         private void Respawn()
         {
-            Radius = 30;
+            Radius = 10 * rand.Next(1, 5);
             color = Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
             X = rand.Next(pbMain.Width - Radius*2) + Radius;
             Y = rand.Next(pbMain.Height - Radius*2) + Radius;

@@ -12,6 +12,7 @@ namespace ParticlesTest
         public float X;
         public float Y;
         public float Radius = 15f;
+        public float GunLength = 25;
 
         public int Direction = 0;
         public float Speed = 3;
@@ -44,10 +45,10 @@ namespace ParticlesTest
             graphics.FillEllipse(new SolidBrush(color), X - Radius, Y - Radius, Radius * 2, Radius * 2);
             graphics.DrawEllipse(new Pen(Color.White, 2), X - Radius, Y - Radius, Radius * 2, Radius * 2);
             
-            graphics.DrawLine(new Pen(Color.White, 2), X, Y, GetGunEndX(), GetGunEndY());
+            graphics.DrawLine(new Pen(Color.LightGray, 2), X, Y, GetGunEndX(), GetGunEndY());
         }
 
-        public int GetGunEndX() { return (int)(X + 25 * (float)Math.Cos(Direction / 180f * Math.PI)); }
-        public int GetGunEndY() { return (int)(Y - 25 * (float)Math.Sin(Direction / 180f * Math.PI)); }
+        public int GetGunEndX() { return (int)(X + GunLength * (float)Math.Cos(Direction / 180f * Math.PI)); }
+        public int GetGunEndY() { return (int)(Y - GunLength * (float)Math.Sin(Direction / 180f * Math.PI)); }
     }
 }

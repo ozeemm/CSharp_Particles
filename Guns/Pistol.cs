@@ -11,8 +11,8 @@ namespace ParticlesTest.Guns
         public Pistol()
         {
             Spreading = 2;
-            SpeedMin = 5;
-            SpeedMax = 6;
+            SpeedMin = 6;
+            SpeedMax = 7;
             RadiusMin = 4;
             RadiusMax = 6;
             LifeMin = 100;

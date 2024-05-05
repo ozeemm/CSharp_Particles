@@ -30,11 +30,7 @@ namespace ParticlesTest
             BulletsColorButton.BackColor = Gun.ColorFrom;
 
             Gun.player = player;
-            Gun.points.Add(new TargetPoint(pbMain));
-            Gun.points.Add(new TargetPoint(pbMain));
-            Gun.points.Add(new TargetPoint(pbMain));
-            Gun.points.Add(new TargetPoint(pbMain));
-            Gun.points.Add(new TargetPoint(pbMain));
+            ChangePointsCount(5);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -60,6 +56,21 @@ namespace ParticlesTest
             }
 
             pbMain.Invalidate(); // Отрисовка
+        }
+
+        private void ChangePointsCount(int count)
+        {
+            while (count != Gun.points.Count)
+            {
+                if (count > Gun.points.Count)
+                {
+                    Gun.points.Add(new TargetPoint(pbMain));
+                }
+                else
+                {
+                    Gun.points.RemoveAt(Gun.points.Count - 1);
+                }
+            }
         }
 
         private void pbMain_MouseDown(object sender, MouseEventArgs e)
@@ -109,6 +120,25 @@ namespace ParticlesTest
                 BulletsColorButton.BackColor = colorDialog.Color;
                 Gun.ColorFrom = colorDialog.Color;
             }
+        }
+
+        private void SpeedTrackbar_Scroll(object sender, EventArgs e)
+        {
+            float speed = SpeedTrackbar.Value / 10f;
+            SpeedLabel.Text = $"Скорость: {speed}";
+            player.Speed = speed;
+        }
+
+        private void RotationSpeedTrackbar_Scroll(object sender, EventArgs e)
+        {
+            RotationSpeedLabel.Text = $"Скорость вращения: {RotationSpeedTrackbar.Value}";
+            player.RotationSpeed = RotationSpeedTrackbar.Value;
+        }
+
+        private void TargetsTrackbar_Scroll(object sender, EventArgs e)
+        {
+            TargetsLabel.Text = $"Количество целей: {TargetsTrackbar.Value}";
+            ChangePointsCount(TargetsTrackbar.Value);
         }
     }
 }
