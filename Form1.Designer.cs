@@ -35,6 +35,9 @@
             this.ShotgunButton = new System.Windows.Forms.Button();
             this.MachineGunButton = new System.Windows.Forms.Button();
             this.ScoreLabel = new System.Windows.Forms.Label();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.BulletsColorLabel = new System.Windows.Forms.Label();
+            this.BulletsColorButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             this.SuspendLayout();
             // 
@@ -100,11 +103,31 @@
             this.ScoreLabel.TabIndex = 4;
             this.ScoreLabel.Text = "Счёт: 0";
             // 
+            // BulletsColorLabel
+            // 
+            this.BulletsColorLabel.AutoSize = true;
+            this.BulletsColorLabel.Location = new System.Drawing.Point(973, 175);
+            this.BulletsColorLabel.Name = "BulletsColorLabel";
+            this.BulletsColorLabel.Size = new System.Drawing.Size(84, 16);
+            this.BulletsColorLabel.TabIndex = 5;
+            this.BulletsColorLabel.Text = "Цвет пулек:";
+            // 
+            // BulletsColorButton
+            // 
+            this.BulletsColorButton.Location = new System.Drawing.Point(1060, 172);
+            this.BulletsColorButton.Name = "BulletsColorButton";
+            this.BulletsColorButton.Size = new System.Drawing.Size(35, 23);
+            this.BulletsColorButton.TabIndex = 6;
+            this.BulletsColorButton.UseVisualStyleBackColor = true;
+            this.BulletsColorButton.Click += new System.EventHandler(this.BulletsColorButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1147, 685);
+            this.Controls.Add(this.BulletsColorButton);
+            this.Controls.Add(this.BulletsColorLabel);
             this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.MachineGunButton);
             this.Controls.Add(this.ShotgunButton);
@@ -126,6 +149,9 @@
         private System.Windows.Forms.Button ShotgunButton;
         private System.Windows.Forms.Button MachineGunButton;
         private System.Windows.Forms.Label ScoreLabel;
+        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.Label BulletsColorLabel;
+        private System.Windows.Forms.Button BulletsColorButton;
     }
 }
 

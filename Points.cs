@@ -119,8 +119,8 @@ namespace ParticlesTest
         {
             Radius = 30;
             color = Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));
-            X = rand.Next(pbMain.Width - (int)Radius*2) + Radius;
-            Y = rand.Next(pbMain.Height - (int)Radius*2) + Radius;
+            X = rand.Next(pbMain.Width - Radius*2) + Radius;
+            Y = rand.Next(pbMain.Height - Radius*2) + Radius;
         }
     }
 }

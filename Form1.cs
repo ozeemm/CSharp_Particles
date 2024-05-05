@@ -27,6 +27,7 @@ namespace ParticlesTest
             };
 
             PistolButton_Click(null, null);
+            BulletsColorButton.BackColor = Gun.ColorFrom;
 
             Gun.player = player;
             Gun.points.Add(new TargetPoint(pbMain));
@@ -99,6 +100,15 @@ namespace ParticlesTest
                 LastPressedButton.BackColor = DefaultColor;
             MachineGunButton.BackColor = HighlightedColor;
             LastPressedButton = MachineGunButton;
+        }
+
+        private void BulletsColorButton_Click(object sender, EventArgs e)
+        {
+            if(colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                BulletsColorButton.BackColor = colorDialog.Color;
+                Gun.ColorFrom = colorDialog.Color;
+            }
         }
     }
 }
