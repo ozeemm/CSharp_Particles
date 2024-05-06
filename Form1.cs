@@ -54,7 +54,8 @@ namespace ParticlesTest
                 
                 player.Render(graphics);
                 CurrentGun.Render(graphics);
-                ScoreLabel.Text = $"Счёт: {Score}";
+                DrawScore(graphics);
+
                 if (IsBorders)
                 {
                     foreach (Emitter emitter in emitters)
@@ -82,6 +83,16 @@ namespace ParticlesTest
             }
         }
 
+        private void DrawScore(Graphics g)
+        {
+            g.DrawString(
+                $"Счёт: {Score}", 
+                new Font("Verdana", 10),
+                new SolidBrush(Color.White),
+                600, 30
+            );
+        }
+
         private void pbMain_MouseDown(object sender, MouseEventArgs e)
         {
             IsMousePressed = true;
@@ -90,6 +101,7 @@ namespace ParticlesTest
         private void pbMain_MouseUp(object sender, MouseEventArgs e)
         {
             IsMousePressed = false;
+            player.RotationSpeed *= -1;
         }
 
         private Color HighlightedColor = Color.GhostWhite;

@@ -34,7 +34,6 @@
             this.PistolButton = new System.Windows.Forms.Button();
             this.ShotgunButton = new System.Windows.Forms.Button();
             this.MachineGunButton = new System.Windows.Forms.Button();
-            this.ScoreLabel = new System.Windows.Forms.Label();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.BulletsColorLabel = new System.Windows.Forms.Label();
             this.BulletsColorButton = new System.Windows.Forms.Button();
@@ -104,15 +103,6 @@
             this.MachineGunButton.Text = "Автомат";
             this.MachineGunButton.UseVisualStyleBackColor = false;
             this.MachineGunButton.Click += new System.EventHandler(this.MachineGunButton_Click);
-            // 
-            // ScoreLabel
-            // 
-            this.ScoreLabel.AutoSize = true;
-            this.ScoreLabel.Location = new System.Drawing.Point(887, 27);
-            this.ScoreLabel.Name = "ScoreLabel";
-            this.ScoreLabel.Size = new System.Drawing.Size(52, 16);
-            this.ScoreLabel.TabIndex = 4;
-            this.ScoreLabel.Text = "Счёт: 0";
             // 
             // BulletsColorLabel
             // 
@@ -232,7 +222,6 @@
             this.Controls.Add(this.SpeedTrackbar);
             this.Controls.Add(this.BulletsColorButton);
             this.Controls.Add(this.BulletsColorLabel);
-            this.Controls.Add(this.ScoreLabel);
             this.Controls.Add(this.MachineGunButton);
             this.Controls.Add(this.ShotgunButton);
             this.Controls.Add(this.PistolButton);
@@ -257,7 +246,6 @@
         private System.Windows.Forms.Button PistolButton;
         private System.Windows.Forms.Button ShotgunButton;
         private System.Windows.Forms.Button MachineGunButton;
-        private System.Windows.Forms.Label ScoreLabel;
         private System.Windows.Forms.ColorDialog colorDialog;
         private System.Windows.Forms.Label BulletsColorLabel;
         private System.Windows.Forms.Button BulletsColorButton;
