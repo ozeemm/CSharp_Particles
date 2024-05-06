@@ -18,8 +18,6 @@ namespace ParticlesTest
         public int MousePositionX;
         public int MousePositionY;
 
-        public int ParticlesCount = 500;
-
         public int X; // X центра эмиттера
         public int Y; // Y центра эмиттера
         public int Direction = 0; // Вектор направления в градусах, куда направляет эмиттер
@@ -31,6 +29,9 @@ namespace ParticlesTest
         public int LifeMin = 50; // Минимальное время жизни частицы
         public int LifeMax = 100; // Максимальное время жизни частицы
         public int ParticlesPerTick = 1; // Количество частиц за такт
+        public int ParticlesLimit = 200; // Лимит партиклов
+
+        private int ParticlesCreated = 0;
 
         public static Color ColorFrom = Color.White; // начальный цвет частицы
         public static Color ColorTo = Color.FromArgb(0, Color.Black); // конечный цвет частиц
@@ -52,8 +53,7 @@ namespace ParticlesTest
                 particle.Life--;
                 if (particle.Life < 0)
                 {
-                    particles.Remove(particle);
-                    //ResetParticle(particle);
+                    ResetParticle(particle);
                 }
                 else
                 {
@@ -69,17 +69,23 @@ namespace ParticlesTest
                     particle.Y += particle.SpeedY;
                 }
             }
+            if (ParticlesCreated < ParticlesLimit)
+            {
                 while (particlesToCreate >= 1)
                 {
                     particlesToCreate -= 1;
                     var particle = CreateParticle();
                     ResetParticle(particle);
                     particles.Add(particle);
+                    ParticlesCreated++;
                 }
+            }
         }
 
         public virtual void ResetParticle(Particle particle)
         {
+            (particle as ParticleColorful).FromColor = ColorFrom;
+
             particle.Life = Particle.rand.Next(LifeMin, LifeMax);
 
             particle.X = X;
