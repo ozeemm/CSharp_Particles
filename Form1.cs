@@ -12,6 +12,8 @@ namespace ParticlesTest
         
         private Player player;
         private Gun CurrentGun;
+
+        private Point MousePos;
         private bool IsMousePressed = false;
         public static int Score = 0;
         private bool IsBorders = true;
@@ -19,6 +21,7 @@ namespace ParticlesTest
         public Form1()
         {
             InitializeComponent();
+            
             pbMain.Image = new Bitmap(pbMain.Width, pbMain.Height);
 
             player = new Player 
@@ -42,7 +45,7 @@ namespace ParticlesTest
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            player.UpdateState(IsMousePressed);
+            player.UpdateState(IsMousePressed, MousePos);
             CurrentGun.UpdateState();
             foreach (Emitter emitter in emitters)
             {
@@ -74,7 +77,7 @@ namespace ParticlesTest
             {
                 if (count > Gun.points.Count)
                 {
-                    Gun.points.Add(new TargetPoint(pbMain));
+                    Gun.points.Add(new Enemy(pbMain));
                 }
                 else
                 {
@@ -101,7 +104,6 @@ namespace ParticlesTest
         private void pbMain_MouseUp(object sender, MouseEventArgs e)
         {
             IsMousePressed = false;
-            player.RotationSpeed *= -1;
         }
 
         private Color HighlightedColor = Color.GhostWhite;
@@ -150,12 +152,6 @@ namespace ParticlesTest
             player.Speed = speed;
         }
 
-        private void RotationSpeedTrackbar_Scroll(object sender, EventArgs e)
-        {
-            RotationSpeedLabel.Text = $"Скорость вращения: {RotationSpeedTrackbar.Value}";
-            player.RotationSpeed = RotationSpeedTrackbar.Value;
-        }
-
         private void TargetsTrackbar_Scroll(object sender, EventArgs e)
         {
             TargetsLabel.Text = $"Количество целей: {TargetsTrackbar.Value}";
@@ -174,6 +170,11 @@ namespace ParticlesTest
         private void BordersCheckbox_CheckedChanged(object sender, EventArgs e)
         {
             IsBorders = BordersCheckbox.Checked;
+        }
+
+        private void pbMain_MouseMove(object sender, MouseEventArgs e)
+        {
+            MousePos = e.Location;
         }
     }
 }

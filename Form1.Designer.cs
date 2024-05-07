@@ -39,15 +39,12 @@
             this.BulletsColorButton = new System.Windows.Forms.Button();
             this.SpeedTrackbar = new System.Windows.Forms.TrackBar();
             this.SpeedLabel = new System.Windows.Forms.Label();
-            this.RotationSpeedLabel = new System.Windows.Forms.Label();
-            this.RotationSpeedTrackbar = new System.Windows.Forms.TrackBar();
             this.TargetsLabel = new System.Windows.Forms.Label();
             this.TargetsTrackbar = new System.Windows.Forms.TrackBar();
             this.BorderColorButton = new System.Windows.Forms.Button();
             this.BordersCheckbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedTrackbar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RotationSpeedTrackbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TargetsTrackbar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,6 +56,7 @@
             this.pbMain.TabIndex = 0;
             this.pbMain.TabStop = false;
             this.pbMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseDown);
+            this.pbMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseMove);
             this.pbMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pbMain_MouseUp);
             // 
             // timer1
@@ -119,20 +117,21 @@
             this.BulletsColorButton.Name = "BulletsColorButton";
             this.BulletsColorButton.Size = new System.Drawing.Size(35, 23);
             this.BulletsColorButton.TabIndex = 6;
+            this.BulletsColorButton.TabStop = false;
             this.BulletsColorButton.UseVisualStyleBackColor = true;
             this.BulletsColorButton.Click += new System.EventHandler(this.BulletsColorButton_Click);
             // 
             // SpeedTrackbar
             // 
             this.SpeedTrackbar.Location = new System.Drawing.Point(973, 265);
-            this.SpeedTrackbar.Maximum = 40;
+            this.SpeedTrackbar.Maximum = 70;
             this.SpeedTrackbar.Minimum = 10;
             this.SpeedTrackbar.Name = "SpeedTrackbar";
             this.SpeedTrackbar.Size = new System.Drawing.Size(144, 56);
             this.SpeedTrackbar.TabIndex = 7;
             this.SpeedTrackbar.TabStop = false;
             this.SpeedTrackbar.TickFrequency = 10;
-            this.SpeedTrackbar.Value = 30;
+            this.SpeedTrackbar.Value = 40;
             this.SpeedTrackbar.Scroll += new System.EventHandler(this.SpeedTrackbar_Scroll);
             // 
             // SpeedLabel
@@ -142,41 +141,20 @@
             this.SpeedLabel.Name = "SpeedLabel";
             this.SpeedLabel.Size = new System.Drawing.Size(81, 16);
             this.SpeedLabel.TabIndex = 8;
-            this.SpeedLabel.Text = "Скорость: 3";
-            // 
-            // RotationSpeedLabel
-            // 
-            this.RotationSpeedLabel.AutoSize = true;
-            this.RotationSpeedLabel.Location = new System.Drawing.Point(976, 305);
-            this.RotationSpeedLabel.Name = "RotationSpeedLabel";
-            this.RotationSpeedLabel.Size = new System.Drawing.Size(148, 16);
-            this.RotationSpeedLabel.TabIndex = 10;
-            this.RotationSpeedLabel.Text = "Скорость вращения: 4";
-            // 
-            // RotationSpeedTrackbar
-            // 
-            this.RotationSpeedTrackbar.Location = new System.Drawing.Point(973, 327);
-            this.RotationSpeedTrackbar.Maximum = 15;
-            this.RotationSpeedTrackbar.Minimum = 1;
-            this.RotationSpeedTrackbar.Name = "RotationSpeedTrackbar";
-            this.RotationSpeedTrackbar.Size = new System.Drawing.Size(144, 56);
-            this.RotationSpeedTrackbar.TabIndex = 9;
-            this.RotationSpeedTrackbar.TabStop = false;
-            this.RotationSpeedTrackbar.Value = 4;
-            this.RotationSpeedTrackbar.Scroll += new System.EventHandler(this.RotationSpeedTrackbar_Scroll);
+            this.SpeedLabel.Text = "Скорость: 4";
             // 
             // TargetsLabel
             // 
             this.TargetsLabel.AutoSize = true;
-            this.TargetsLabel.Location = new System.Drawing.Point(976, 376);
+            this.TargetsLabel.Location = new System.Drawing.Point(976, 305);
             this.TargetsLabel.Name = "TargetsLabel";
-            this.TargetsLabel.Size = new System.Drawing.Size(141, 16);
+            this.TargetsLabel.Size = new System.Drawing.Size(147, 16);
             this.TargetsLabel.TabIndex = 12;
-            this.TargetsLabel.Text = "Количество целей: 5";
+            this.TargetsLabel.Text = "Количество врагов: 5";
             // 
             // TargetsTrackbar
             // 
-            this.TargetsTrackbar.Location = new System.Drawing.Point(973, 398);
+            this.TargetsTrackbar.Location = new System.Drawing.Point(973, 327);
             this.TargetsTrackbar.Minimum = 1;
             this.TargetsTrackbar.Name = "TargetsTrackbar";
             this.TargetsTrackbar.Size = new System.Drawing.Size(144, 56);
@@ -191,6 +169,7 @@
             this.BorderColorButton.Name = "BorderColorButton";
             this.BorderColorButton.Size = new System.Drawing.Size(35, 23);
             this.BorderColorButton.TabIndex = 14;
+            this.BorderColorButton.TabStop = false;
             this.BorderColorButton.UseVisualStyleBackColor = true;
             this.BorderColorButton.Click += new System.EventHandler(this.BorderColorButton_Click);
             // 
@@ -203,6 +182,7 @@
             this.BordersCheckbox.Name = "BordersCheckbox";
             this.BordersCheckbox.Size = new System.Drawing.Size(85, 20);
             this.BordersCheckbox.TabIndex = 15;
+            this.BordersCheckbox.TabStop = false;
             this.BordersCheckbox.Text = "Границы";
             this.BordersCheckbox.UseVisualStyleBackColor = true;
             this.BordersCheckbox.CheckedChanged += new System.EventHandler(this.BordersCheckbox_CheckedChanged);
@@ -216,8 +196,6 @@
             this.Controls.Add(this.BorderColorButton);
             this.Controls.Add(this.TargetsLabel);
             this.Controls.Add(this.TargetsTrackbar);
-            this.Controls.Add(this.RotationSpeedLabel);
-            this.Controls.Add(this.RotationSpeedTrackbar);
             this.Controls.Add(this.SpeedLabel);
             this.Controls.Add(this.SpeedTrackbar);
             this.Controls.Add(this.BulletsColorButton);
@@ -232,7 +210,6 @@
             this.Text = "My Awesome Shooter";
             ((System.ComponentModel.ISupportInitialize)(this.pbMain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SpeedTrackbar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.RotationSpeedTrackbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TargetsTrackbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -251,8 +228,6 @@
         private System.Windows.Forms.Button BulletsColorButton;
         private System.Windows.Forms.TrackBar SpeedTrackbar;
         private System.Windows.Forms.Label SpeedLabel;
-        private System.Windows.Forms.Label RotationSpeedLabel;
-        private System.Windows.Forms.TrackBar RotationSpeedTrackbar;
         private System.Windows.Forms.Label TargetsLabel;
         private System.Windows.Forms.TrackBar TargetsTrackbar;
         private System.Windows.Forms.Button BorderColorButton;

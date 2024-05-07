@@ -67,7 +67,7 @@ namespace ParticlesTest
 
     public class TargetPoint : IImpactPoint
     {
-        private static Random rand = new Random();
+        protected static Random rand = new Random();
         private List<Explosion> explosions = new List<Explosion>();
 
         public PictureBox pbMain;
@@ -115,7 +115,7 @@ namespace ParticlesTest
                 g.DrawEllipse(new Pen(color, 2), X - r, Y - r, r * 2, r * 2);
             }
         }
-        private void Respawn()
+        protected virtual void Respawn()
         {
             Radius = 10 * rand.Next(1, 5);
             color = Color.FromArgb(rand.Next(0, 256), rand.Next(0, 256), rand.Next(0, 256));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -11,7 +12,7 @@ namespace ParticlesTest.Guns
     public abstract class Gun
     {
         protected static List<Particle> particles = new List<Particle>();
-        public static List<IImpactPoint> points = new List<IImpactPoint>();
+        public static List<Enemy> points = new List<Enemy>();
 
         public int X; // X центра эмиттера
         public int Y; // Y центра эмиттера
@@ -45,6 +46,11 @@ namespace ParticlesTest.Guns
                 CreateParticles();
             }
             k = (k + 1) % Cooldown;
+
+            foreach(var point in points)
+            {
+                point.UpdateState(player);
+            }
 
             foreach (var particle in particles.ToList())
             {

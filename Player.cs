@@ -16,17 +16,23 @@ namespace ParticlesTest
 
         public int Direction = 0;
         public float Speed = 3;
-        public int RotationSpeed = 4;
 
         public float SpeedX;
         public float SpeedY;
 
         public Color color = Color.DeepSkyBlue;
 
-        public void UpdateState(bool isGoing)
+        public void UpdateState(bool isGoing, Point MousePos)
         {
+            var length = Math.Sqrt((X - MousePos.X) * (X - MousePos.X) + (Y - MousePos.Y) * (Y - MousePos.Y));
+            if (length < Radius)
+                return;
+
+            Direction = (int)(90 + Math.Atan2(X - MousePos.X, Y - MousePos.Y) * 180 / Math.PI);
+
             if (isGoing) 
             {
+
                 SpeedX = (float)Math.Cos(Direction / 180f * Math.PI) * Speed;
                 SpeedY = -(float)Math.Sin(Direction / 180f * Math.PI) * Speed;
 
@@ -37,7 +43,7 @@ namespace ParticlesTest
             {
                 SpeedX = 0;
                 SpeedY = 0;
-                Direction = (Direction + RotationSpeed) % 360;
+                //Direction = (Direction + RotationSpeed) % 360;
             }
         }
         public void Render(Graphics graphics)
